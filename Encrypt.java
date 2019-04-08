@@ -18,12 +18,20 @@ public class Encrypt
 			if(em.isLower(str.charAt(i)))
 			{
 				num = c - 'a';
-				str_ENC += (char) ((num + 3) % 26 + 'a');
+				if(num <= 3)
+				{
+					num += 26;
+				}
+				str_ENC += (char) ((num - 3) % 26 + 'a');
 			}
 			else if(em.isUpper(str.charAt(i)))
 			{
 				num = c - 'A';
-				str_ENC += (char) ((num + 3) % 26 + 'A');
+				if(num <= 3)
+				{
+					num += 26;
+				}
+				str_ENC += (char) ((num - 3) % 26 + 'A');
 			}
 			else
 			{
