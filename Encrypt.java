@@ -1,44 +1,54 @@
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.PrintWriter;
 
-public class Encrypt 
+public class Encrypt
 {
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException
 	{
 		Scanner scan = new Scanner(System.in);
 		EncryptMethods em = new EncryptMethods();
-		System.out.print("Please enter a string to encrypt: ");
-		String str = scan.nextLine();
-		String str_ENC = "";
+		System.out.print("Please enter the name of the file to encrypt: ");
+		String fileName = scan.nextLine();
+		Scanner inputFile = new Scanner(fileName);
+		PrintWriter outputFile = new PrintWriter(fileName.substring(0, fileName.length() - 3) + "_ENC.txt");
+		String inputString = "";
+		while(inputFile.hasNext())
+		{
+			inputString = inputFile.nextLine();
+		}
+		String outputString = "";
 		char c = ' ';
 		int num = 0;
-		for(int i = 0; i < str.length(); i++)
+		for(int i = 0; i < inputString.length(); i++)
 		{
-			c = str.charAt(i);
-			if(em.isLower(str.charAt(i)))
+			c = inputString.charAt(i);
+			if(c >= 'a' && c <= 'z')
 			{
 				num = c - 'a';
 				if(num <= 3)
 				{
 					num += 26;
 				}
-				str_ENC += (char) ((num - 3) % 26 + 'a');
+				outputString += (char) ((num - 3) % 26 + 'a');
 			}
-			else if(em.isUpper(str.charAt(i)))
+			else if(c >= 'A' && c <= 'Z')
 			{
 				num = c - 'A';
 				if(num <= 3)
 				{
 					num += 26;
 				}
-				str_ENC += (char) ((num - 3) % 26 + 'A');
+				outputString += (char) ((num - 3) % 26 + 'A');
 			}
 			else
 			{
-				str_ENC += c;
+				outputString += c;
 			}
 		}
-		System.out.print(str_ENC);
+		outputFile.print(outputString);
+		outputFile.close();
 
 	}
 
