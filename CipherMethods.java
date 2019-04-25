@@ -10,6 +10,7 @@ public class CipherMethods
 	{
 		System.out.print("Would you like to encrypt or decrypt a file? ");
 		String encryptOrDecrypt = scan.nextLine();
+		encryptOrDecrypt = encryptOrDecrypt.toLowerCase();
 		if(encryptOrDecrypt.equals("encrypt"))
 		{
 			
