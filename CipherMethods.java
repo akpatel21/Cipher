@@ -5,18 +5,37 @@ import java.io.File;
 
 public class CipherMethods 
 {
-	Scanner scan = new Scanner(System.in);
-	public static void main(String[] args) 
+	
+	public static void main(String[] args) throws IOException
 	{
+		Scanner scan = new Scanner(System.in);
 		System.out.print("Would you like to encrypt or decrypt a file? ");
 		String encryptOrDecrypt = scan.nextLine();
 		encryptOrDecrypt = encryptOrDecrypt.toLowerCase();
+		while(!encryptOrDecrypt.equals("encrypt") && !encryptOrDecrypt.equals("decrypt"))
+		{
+			System.out.print("Please enter \"encrypt\" or \"decrypt\": ");
+			encryptOrDecrypt = scan.nextLine();
+		}
+		System.out.print("How many places should the alphabet be shifted? ");
+		int shift = scan.nextInt();
+		scan.nextLine();
+		System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
+		String inputFile = scan.nextLine();
 		if(encryptOrDecrypt.equals("encrypt"))
 		{
-			
+			PrintWriter outputFile = new PrintWriter(inputFile.substring(0, inputFile.length() - 4) + "_ENC.txt");
+			outputFile.print(caesar_cipher(inputFile, true, shift));
+			outputFile.close();
+			System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_ENC.txt");
 		}
-		System.out.print("\nHow many places should the alphabet be shifted? ");
-		System.out.print("Enter a filename to " + + ": ");
+		else
+		{
+			PrintWriter outputFile = new PrintWriter(inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
+			outputFile.print(caesar_cipher(inputFile, false, shift));
+			outputFile.close();
+			System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
+		}
 	}
 	
 	public static String caesar_cipher(String fileName, boolean encrypt, int shiftAmount) throws IOException
@@ -32,7 +51,6 @@ public class CipherMethods
 		int num = 0;
 		if(encrypt)
 		{
-			PrintWriter outputFile = new PrintWriter(fileName.substring(0, fileName.length() - 4) + "_ENC.txt");
 			for(int i = 0; i < inputString.length(); i++)
 			{
 				c = inputString.charAt(i);
@@ -59,12 +77,9 @@ public class CipherMethods
 					outputString += c;
 				}
 			}
-			outputFile.print(outputString);
-			outputFile.close();
 		}
 		else if(!encrypt)
 		{
-			PrintWriter outputFile = new PrintWriter(fileName.substring(0, fileName.length() - 4) + "_DEC.txt");
 			for(int i = 0; i < inputString.length(); i++)
 			{
 				c = inputString.charAt(i);
@@ -91,8 +106,6 @@ public class CipherMethods
 					outputString += c;
 				}
 			}
-			outputFile.print(outputString);
-			outputFile.close();
 		}
 		inputFile.close();
 		return outputString;
