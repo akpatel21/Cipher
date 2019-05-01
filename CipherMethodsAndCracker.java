@@ -45,7 +45,7 @@ public class CipherMethodsAndCracker
 			System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
 			String inputFile = scan.nextLine();
 			PrintWriter outputFile = new PrintWriter(inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
-			String outputString = caesar_cipher(inputFile, true, shift);
+			String outputString = caesar_cipher(inputFile, false, shift);
 			for(int i = 0; i < outputString.length(); i++)
 			{
 				outputFile.print(outputString.charAt(i));
@@ -61,6 +61,10 @@ public class CipherMethodsAndCracker
 		{
 			System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
 			String inputFile = scan.nextLine();
+			for(int i = 1; i < 26; i++)
+			{
+				
+			}
 		}
 	}
 	
