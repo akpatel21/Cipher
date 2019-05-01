@@ -90,7 +90,7 @@ public class CipherMethods
 					{
 						num += 26;
 					}
-					outputString += (char) ((num + shiftAmount) % 26 + 'a');
+					outputString += (char) ((num + shiftAmount) % 26 - 'a');
 				}
 				else if(c >= 'A' && c <= 'Z')
 				{
@@ -99,7 +99,7 @@ public class CipherMethods
 					{
 						num += 26;
 					}
-					outputString += (char) ((num + shiftAmount) % 26 + 'A');
+					outputString += (char) ((num + shiftAmount) % 26 - 'A');
 				}
 				else
 				{
