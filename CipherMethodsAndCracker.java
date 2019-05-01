@@ -3,27 +3,27 @@ import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.File;
 
-public class CipherMethods 
+public class CipherMethodsAndCracker 
 {
 	
 	public static void main(String[] args) throws IOException
 	{
 		Scanner scan = new Scanner(System.in);
-		System.out.print("Would you like to encrypt or decrypt a file? ");
+		System.out.print("Would you like to encrypt, decrypt, or crack a file? ");
 		String encryptOrDecrypt = scan.nextLine();
 		encryptOrDecrypt = encryptOrDecrypt.toLowerCase();
-		while(!encryptOrDecrypt.equals("encrypt") && !encryptOrDecrypt.equals("decrypt"))
+		while(!encryptOrDecrypt.equals("encrypt") && !encryptOrDecrypt.equals("decrypt") && !encryptOrDecrypt.equals("crack"))
 		{
-			System.out.print("Please enter \"encrypt\" or \"decrypt\": ");
+			System.out.print("Please enter \"encrypt\", \"decrypt\", or \"crack\": ");
 			encryptOrDecrypt = scan.nextLine();
 		}
-		System.out.print("How many places should the alphabet be shifted? ");
-		int shift = scan.nextInt();
-		scan.nextLine();
-		System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
-		String inputFile = scan.nextLine();
 		if(encryptOrDecrypt.equals("encrypt"))
 		{
+			System.out.print("How many places should the alphabet be shifted? ");
+			int shift = scan.nextInt();
+			scan.nextLine();
+			System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
+			String inputFile = scan.nextLine();
 			PrintWriter outputFile = new PrintWriter(inputFile.substring(0, inputFile.length() - 4) + "_ENC.txt");
 			String outputString = caesar_cipher(inputFile, true, shift);
 			for(int i = 0; i < outputString.length(); i++)
@@ -34,15 +34,33 @@ public class CipherMethods
 					outputFile.println();
 				}
 			}
-			outputFile.close();
+			outputFile.close();		
 			System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_ENC.txt");
+		}
+		else if(encryptOrDecrypt.equals("decrypt"))
+		{
+			System.out.print("How many places should the alphabet be shifted? ");
+			int shift = scan.nextInt();
+			scan.nextLine();
+			System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
+			String inputFile = scan.nextLine();
+			PrintWriter outputFile = new PrintWriter(inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
+			String outputString = caesar_cipher(inputFile, true, shift);
+			for(int i = 0; i < outputString.length(); i++)
+			{
+				outputFile.print(outputString.charAt(i));
+				if(outputString.charAt(i) == '\n')
+				{
+					outputFile.println();
+				}
+			}
+			outputFile.close();
+			System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
 		}
 		else
 		{
-			PrintWriter outputFile = new PrintWriter(inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
-			outputFile.print(caesar_cipher(inputFile, false, shift));
-			outputFile.close();
-			System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
+			System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
+			String inputFile = scan.nextLine();
 		}
 	}
 	

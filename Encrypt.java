@@ -17,13 +17,21 @@ public class Encrypt
 		while(inputFile.hasNext())
 		{
 			inputString += inputFile.nextLine();
+			inputString += "\n";
 		}
+		System.out.print(inputString);
+		char p = inputString.charAt(7);
+		if(p=='\n')
+			System.out.print("\\n");
 		String outputString = "";
 		char c;
 		int num = 0;
+		System.out.print(inputString.indexOf('\n'));
 		for(int i = 0; i < inputString.length(); i++)
 		{
 			c = inputString.charAt(i);
+			if(c=='\n')
+				outputString += "\n";
 			if(c >= 'a' && c <= 'z')
 			{
 				num = c - 'a';
@@ -49,7 +57,14 @@ public class Encrypt
 			}
 		}
 		inputFile.close();
-		outputFile.print(outputString);
+		for(int i = 0; i < outputString.length(); i++)
+		{
+			outputFile.print(outputString.charAt(i));
+			if(outputString.charAt(i) == '\n')
+			{
+				outputFile.println();
+			}
+		}
 		outputFile.close();
 
 	}
