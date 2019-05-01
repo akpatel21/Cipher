@@ -61,6 +61,7 @@ public class CipherMethodsAndCracker
 		{
 			System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
 			String inputFile = scan.nextLine();
+			String outputString;
 			for(int i = 1; i < 26; i++)
 			{
 				
