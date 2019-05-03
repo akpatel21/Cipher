@@ -17,22 +17,18 @@ public class Encrypt
 		while(inputFile.hasNext())
 		{
 			inputString += inputFile.nextLine();
-			inputString += "\n";
+			if(inputFile.hasNext())
+			{
+				inputString += '\n';
+			}
 		}
-		System.out.print(inputString);
-		char p = inputString.charAt(7);
-		if(p=='\n')
-			System.out.print("\\n");
 		String outputString = "";
 		char c;
 		int num = 0;
-		System.out.print(inputString.indexOf('\n'));
 		for(int i = 0; i < inputString.length(); i++)
 		{
 			c = inputString.charAt(i);
-			if(c=='\n')
-				outputString += "\n";
-			if(c >= 'a' && c <= 'z')
+			if(isLower(c))
 			{
 				num = c - 'a';
 				if(num <= 3)
@@ -41,7 +37,7 @@ public class Encrypt
 				}
 				outputString += (char) ((num - 3) % 26 + 'a');
 			}
-			else if(c >= 'A' && c <= 'Z')
+			else if(isUpper(c))
 			{
 				num = c - 'A';
 				if(num <= 3)
@@ -52,7 +48,6 @@ public class Encrypt
 			}
 			else
 			{
-				System.out.println(c);
 				outputString += c;
 			}
 		}
@@ -69,4 +64,13 @@ public class Encrypt
 
 	}
 
+	public static boolean isLower(char c)
+	{
+		return c >= 'a' && c <= 'z';
+	}
+	
+	public static boolean isUpper(char c)
+	{
+		return c >= 'A' && c <= 'Z';
+	}
 }

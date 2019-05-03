@@ -40,7 +40,15 @@ public class CipherMethods
 		else
 		{
 			PrintWriter outputFile = new PrintWriter(inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
-			outputFile.print(caesar_cipher(inputFile, false, shift));
+			String outputString = caesar_cipher(inputFile, false, shift);
+			for(int i = 0; i < outputString.length(); i++)
+			{
+				outputFile.print(outputString.charAt(i));
+				if(outputString.charAt(i) == '\n')
+				{
+					outputFile.println();
+				}
+			}
 			outputFile.close();
 			System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
 		}
@@ -53,6 +61,10 @@ public class CipherMethods
 		while(inputFile.hasNext())
 		{
 			inputString += inputFile.nextLine();
+			if(inputFile.hasNext())
+			{
+				inputString += '\n';
+			}
 		}
 		String outputString = "";
 		char c;
@@ -62,7 +74,7 @@ public class CipherMethods
 			for(int i = 0; i < inputString.length(); i++)
 			{
 				c = inputString.charAt(i);
-				if(c >= 'a' && c <= 'z')
+				if(isLower(c))
 				{
 					num = c - 'a';
 					if(num <= 3)
@@ -71,7 +83,7 @@ public class CipherMethods
 					}
 					outputString += (char) ((num + shiftAmount) % 26 + 'a');
 				}
-				else if(c >= 'A' && c <= 'Z')
+				else if(isUpper(c))
 				{
 					num = c - 'A';
 					if(num <= 3)
@@ -91,7 +103,7 @@ public class CipherMethods
 			for(int i = 0; i < inputString.length(); i++)
 			{
 				c = inputString.charAt(i);
-				if(c >= 'a' && c <= 'z')
+				if(isLower(c))
 				{
 					num = c - 'a';
 					if(num <= 3)
@@ -100,7 +112,7 @@ public class CipherMethods
 					}
 					outputString += (char) ((num - shiftAmount) % 26 + 'a');
 				}
-				else if(c >= 'A' && c <= 'Z')
+				else if(isUpper(c))
 				{
 					num = c - 'A';
 					if(num <= 3)
@@ -117,5 +129,15 @@ public class CipherMethods
 		}
 		inputFile.close();
 		return outputString;
+	}
+
+	public static boolean isLower(char c)
+	{
+		return c >= 'a' && c <= 'z';
+	}
+	
+	public static boolean isUpper(char c)
+	{
+		return c >= 'A' && c <= 'Z';
 	}
 }
