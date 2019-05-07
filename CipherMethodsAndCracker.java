@@ -16,6 +16,7 @@ public class CipherMethodsAndCracker
 		{
 			System.out.print("Please enter \"encrypt\", \"decrypt\", or \"crack\": ");
 			encryptOrDecrypt = scan.nextLine();
+			encryptOrDecrypt = encryptOrDecrypt.toLowerCase();
 		}
 		if(encryptOrDecrypt.equals("encrypt"))
 		{
@@ -62,8 +63,23 @@ public class CipherMethodsAndCracker
 			System.out.print("Enter a filename to " + encryptOrDecrypt + ": ");
 			String inputFile = scan.nextLine();
 			String outputString;
+			String correct;
 			for(int i = 1; i < 26; i++)
 			{
+				System.out.println("\n---" + caesar_cipher(inputFile, false, i).substring(0, 100));
+				System.out.print("---\nDoes this look right? ");
+				correct = scan.nextLine();
+				correct = correct.toLowerCase();
+				while(!correct.equals("yes") || !correct.equals("no"))
+				{
+					System.out.println("Please answer \"yes\" or \"no\": ");
+					correct = scan.nextLine();
+					correct = correct.toLowerCase();
+				}
+				if(correct.equals("yes"))
+				{
+					
+				}
 				
 			}
 		}
@@ -76,6 +92,10 @@ public class CipherMethodsAndCracker
 		while(inputFile.hasNext())
 		{
 			inputString += inputFile.nextLine();
+			if(inputFile.hasNext())
+			{
+				inputString += '\n';
+			}
 		}
 		String outputString = "";
 		char c;
