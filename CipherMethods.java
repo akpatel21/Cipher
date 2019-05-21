@@ -16,6 +16,7 @@ public class CipherMethods
 		{
 			System.out.print("Please enter \"encrypt\" or \"decrypt\": ");
 			encryptOrDecrypt = scan.nextLine();
+			encryptOrDecrypt = encryptOrDecrypt.toLowerCase();
 		}
 		System.out.print("How many places should the alphabet be shifted? ");
 		int shift = scan.nextInt();
