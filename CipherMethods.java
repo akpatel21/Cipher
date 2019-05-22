@@ -78,7 +78,7 @@ public class CipherMethods
 				if(isLower(c))
 				{
 					num = c - 'a';
-					if(num <= 3)
+					while((num - shiftAmount) < 0)
 					{
 						num += 26;
 					}
@@ -87,7 +87,7 @@ public class CipherMethods
 				else if(isUpper(c))
 				{
 					num = c - 'A';
-					if(num <= 3)
+					while((num - shiftAmount) < 0)
 					{
 						num += 26;
 					}
@@ -107,7 +107,7 @@ public class CipherMethods
 				if(isLower(c))
 				{
 					num = c - 'a';
-					if(num <= 3)
+					while((num - shiftAmount) < 0)
 					{
 						num += 26;
 					}
@@ -116,7 +116,7 @@ public class CipherMethods
 				else if(isUpper(c))
 				{
 					num = c - 'A';
-					if(num <= 3)
+					while((num - shiftAmount) < 0)
 					{
 						num += 26;
 					}
