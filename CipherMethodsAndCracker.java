@@ -66,20 +66,33 @@ public class CipherMethodsAndCracker
 			String correct;
 			for(int i = 1; i < 26; i++)
 			{
-				System.out.println("\n---" + caesar_cipher(inputFile, false, i).substring(0, 100));
+				System.out.println("---" + caesar_cipher(inputFile, false, i).substring(0, 100));
 				System.out.print("---\nDoes this look right? ");
 				correct = scan.nextLine();
 				correct = correct.toLowerCase();
-				while(!correct.equals("yes") || !correct.equals("no"))
+				while(!correct.equals("yes") && !correct.equals("no"))
 				{
-					System.out.println("Please answer \"yes\" or \"no\": ");
+					System.out.print("\nPlease answer \"yes\" or \"no\": ");
 					correct = scan.nextLine();
 					correct = correct.toLowerCase();
 				}
 				if(correct.equals("yes"))
 				{
-					
+					PrintWriter outputFile = new PrintWriter(inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
+					outputString = caesar_cipher(inputFile, false, i);
+					for(int j = 0; j < outputString.length(); j++)
+					{
+						outputFile.print(outputString.charAt(j));
+						if(outputString.charAt(j) == '\n')
+						{
+							outputFile.println();
+						}
+					}
+					outputFile.close();
+					System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
+					i = 26;
 				}
+				System.out.println();
 				
 			}
 		}
@@ -105,19 +118,19 @@ public class CipherMethodsAndCracker
 			for(int i = 0; i < inputString.length(); i++)
 			{
 				c = inputString.charAt(i);
-				if(c >= 'a' && c <= 'z')
+				if(isLower(c))
 				{
 					num = c - 'a';
-					if(num <= 3)
+					while((num - shiftAmount) < 0)
 					{
 						num += 26;
 					}
 					outputString += (char) ((num + shiftAmount) % 26 + 'a');
 				}
-				else if(c >= 'A' && c <= 'Z')
+				else if(isUpper(c))
 				{
 					num = c - 'A';
-					if(num <= 3)
+					while((num - shiftAmount) < 0)
 					{
 						num += 26;
 					}
@@ -134,19 +147,19 @@ public class CipherMethodsAndCracker
 			for(int i = 0; i < inputString.length(); i++)
 			{
 				c = inputString.charAt(i);
-				if(c >= 'a' && c <= 'z')
+				if(isLower(c))
 				{
 					num = c - 'a';
-					if(num <= 3)
+					while((num - shiftAmount) < 0)
 					{
 						num += 26;
 					}
 					outputString += (char) ((num - shiftAmount) % 26 + 'a');
 				}
-				else if(c >= 'A' && c <= 'Z')
+				else if(isUpper(c))
 				{
 					num = c - 'A';
-					if(num <= 3)
+					while((num - shiftAmount) < 0)
 					{
 						num += 26;
 					}
@@ -160,5 +173,15 @@ public class CipherMethodsAndCracker
 		}
 		inputFile.close();
 		return outputString;
+	}
+	
+	public static boolean isLower(char c)
+	{
+		return c >= 'a' && c <= 'z';
+	}
+	
+	public static boolean isUpper(char c)
+	{
+		return c >= 'A' && c <= 'Z';
 	}
 }
