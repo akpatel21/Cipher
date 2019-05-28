@@ -1,7 +1,7 @@
-import java.io.IOException;
 import java.util.Scanner;
-import java.io.PrintWriter;
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CipherMethodsAndCracker 
 {
@@ -30,10 +30,6 @@ public class CipherMethodsAndCracker
 			for(int i = 0; i < outputString.length(); i++)
 			{
 				outputFile.print(outputString.charAt(i));
-				if(outputString.charAt(i) == '\n')
-				{
-					outputFile.println();
-				}
 			}
 			outputFile.close();		
 			System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_ENC.txt");
@@ -50,10 +46,6 @@ public class CipherMethodsAndCracker
 			for(int i = 0; i < outputString.length(); i++)
 			{
 				outputFile.print(outputString.charAt(i));
-				if(outputString.charAt(i) == '\n')
-				{
-					outputFile.println();
-				}
 			}
 			outputFile.close();
 			System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
@@ -83,10 +75,6 @@ public class CipherMethodsAndCracker
 					for(int j = 0; j < outputString.length(); j++)
 					{
 						outputFile.print(outputString.charAt(j));
-						if(outputString.charAt(j) == '\n')
-						{
-							outputFile.println();
-						}
 					}
 					outputFile.close();
 					System.out.print("Result written to " + inputFile.substring(0, inputFile.length() - 4) + "_DEC.txt");
